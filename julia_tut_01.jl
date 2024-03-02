@@ -20,7 +20,7 @@ println(occursin("key", "monkey"))
 
 age = 12
 
-if age >= 5 && age <- 6
+if age >= 5 && age <= 6
     println("Kinderarten")
 else
     println("Grown up")
