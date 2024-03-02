@@ -23,4 +23,8 @@ end
 
 println(getSum2(1,2,3))
 
+println(map((x,y) -> x + y, [1,2], [3,4]))
 
+sentence = "This is a string"
+sArray = split(sentence)
+println(reduce((x, y) -> length(x) > length(y) ? x : y, sArray))
