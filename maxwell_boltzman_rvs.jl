@@ -1,7 +1,7 @@
 using Plots
 using Distributions
 
-scale = 1.0
+scale = 300
 dist = scale * Chi(3)
 random_values = rand(dist, 1000)
 
