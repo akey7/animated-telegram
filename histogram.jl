@@ -10,6 +10,6 @@ random_values = rand(dist, 1000)  # n is the number of values you want to genera
 # Create and customize the histogram
 hist = histogram(random_values, bins=100, title="Normally Distributed Random Values", xlabel="Values", ylabel="Frequency", legend=false)
 
-# Optionally, save the plot to a file
+# Display the plot
 display(hist)
 readline()
