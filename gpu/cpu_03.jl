@@ -1,4 +1,7 @@
+# From https://cuda.juliagpu.org/stable/tutorials/introduction/
+
 using Test
+using BenchmarkTools
 
 N = 2^20
 x = fill(1.0f0, N)  # a vector filled with 1.0 (Float32)
@@ -12,5 +15,6 @@ function parallel_add!(y, x)
 end
 
 fill!(y, 2)
+# @btime parallel_add!(y, x)
 parallel_add!(y, x)
 @test all(y .== 3.0f0)

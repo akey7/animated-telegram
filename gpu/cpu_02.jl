@@ -1,6 +1,7 @@
 # From https://cuda.juliagpu.org/stable/tutorials/introduction/
 
 using Test
+using BenchmarkTools
 
 N = 2^20
 x = fill(1.0f0, N)  # a vector filled with 1.0 (Float32)
