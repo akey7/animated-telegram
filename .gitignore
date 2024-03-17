@@ -30,3 +30,7 @@ Manifest.toml
 *.png
 *.svg
 *.pdf
+*.html
+*.css
+*.js
+*.woff
