@@ -1,0 +1,8 @@
+---
+title: "Plots Demo"
+date: "03/17/2024"
+format:
+  html:
+    code-fold: false
+jupyter: julia-1.10
+---
