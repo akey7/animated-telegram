@@ -6,3 +6,71 @@ format:
     code-fold: false
 jupyter: julia-1.10
 ---
+
+```{julia}
+#| label: import-libraries
+#| eval: true
+#| include: false
+
+using LinearAlgebra
+```
+
+## Workbook 08, Page 22, Problem 01
+
+Solve the following system of equations with matrix inversion:
+
+$$ -4x + 3y = -14 $$
+$$ 7x - 4y = 32 $$
+
+Matrix of coefficients:
+
+```{julia}
+#| label: wkbk08-pg22-prob01-step01
+#| eval: true
+#| include: true
+
+A = [-4.0 3.0; 7.0 -4.0]
+A
+```
+
+Matrix of values on the right hand size:
+
+```{julia}
+#| label: wkbk08-pg22-prob01-step02
+#| eval: true
+#| include: true
+
+b = [-14.0; 32.0]
+b
+```
+
+Check A's determinant to ensure it is not singular (therefore esnuring it has an inverse)
+
+```{julia}
+#| label: wkbk08-pg22-prob01-step03
+#| eval: true
+#| include: true
+
+det(A)
+```
+
+Calculate the inverse of A.
+
+```{julia}
+#| label: wkbk08-pg22-prob01-step04
+#| eval: true
+#| include: true
+
+A_inv = inv(A)
+A_inv
+```
+
+Finally find the vector x
+
+```{julia}
+#| label: wkbk08-pg22-prob01-step05
+#| eval: true
+#| include: true
+
+A_inv * b
+```
