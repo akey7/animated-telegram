@@ -7,4 +7,38 @@ format:
 jupyter: julia-1.10
 ---
 
+```{julia}
+#| label: load-modules
+#| eval: true
+#| include: false
 
+using Plots
+```
+
+## Functions to create surfaces
+
+These functions implement the expression, which can calculate scalar quantities when given `x1` and `x2` components of a 2-element vector.
+
+$$ f(\mathbf x) = \mathbf x^T \mathbf A \mathbf x $$
+
+### Positive definite
+
+The 2x2 identity matrix is positive definite:
+
+$$
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+$$
+
+### Negative definite
+
+The following 2x2 matrix is negative definite:
+
+$$
+\begin{bmatrix}
+-1 & 0 \\
+0 & -2 \\
+\end{bmatrix}
+$$
