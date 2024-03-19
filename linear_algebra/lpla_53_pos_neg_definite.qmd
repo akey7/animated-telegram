@@ -7,4 +7,96 @@ format:
 jupyter: julia-1.10
 ---
 
+```{julia}
+#| label: load-modules
+#| eval: true
+#| include: false
 
+using Plots
+```
+
+## Functions to create surfaces
+
+These functions implement the expression, which can calculate scalar quantities when given `x1` and `x2` components of a 2-element vector.
+
+$$ f(\mathbf x) = \mathbf x^T \mathbf A \mathbf x $$
+
+In this case, I take the matrix A to positive definite or negative definite. Then, I pass the same vectors into the function to see the behavior of positive or negative definite matrices. 
+
+### Positive definite
+
+The 2x2 identity matrix is positive definite:
+
+$$
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+$$
+
+```{julia}
+#| label: positive-definite-function
+#| eval: true
+#| include: true
+
+function pos_definite(x1::Float64, x2::Float64)
+    A = [1.0 0.0; 0.0 1.0]
+    x = [x1; x2]
+    x' * A * x
+end
+```
+
+### Negative definite
+
+The following 2x2 matrix is negative definite:
+
+$$
+\begin{bmatrix}
+-1 & 0 \\
+0 & -2 \\
+\end{bmatrix}
+$$
+
+```{julia}
+#| label: negative-definite-function
+#| eval: true
+#| include: true
+
+function neg_definite(x1::Float64, x2::Float64)
+    A = [-1.0 0.0; 0.0 -2.0]
+    x = [x1; x2]
+    x' * A * x
+end
+```
+
+## Surface plots
+
+### Positive definite plot
+
+```{julia}
+#| label: positive-definite-plot
+#| eval: true
+#| include: true
+
+xs = -5:0.1:5
+ys = -5:0.1:5
+
+zs = [pos_definite(x, y) for x in xs, y in ys]
+
+surface(xs, ys, zs, title="Positive Definite Matrix Transform", xlabel="x", ylabel="y", zlabel="z", cmap=:cool)
+```
+
+### Negative definite plot
+
+```{julia}
+#| label: negative-definite-plot
+#| eval: true
+#| include: true
+
+xs = -5:0.1:5
+ys = -5:0.1:5
+
+zs = [neg_definite(x, y) for x in xs, y in ys]
+
+surface(xs, ys, zs, title="Negative Definite Matrix Transform", xlabel="x", ylabel="y", zlabel="z", cmap=:cool)
+```
