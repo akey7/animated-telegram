@@ -21,6 +21,8 @@ These functions implement the expression, which can calculate scalar quantities 
 
 $$ f(\mathbf x) = \mathbf x^T \mathbf A \mathbf x $$
 
+In this case, I take the matrix A to positive definite or negative definite. Then, I pass the same vectors into the function to see the behavior of positive or negative definite matrices. 
+
 ### Positive definite
 
 The 2x2 identity matrix is positive definite:
@@ -81,7 +83,7 @@ ys = -5:0.1:5
 
 zs = [pos_definite(x, y) for x in xs, y in ys]
 
-surface(xs, ys, zs)
+surface(xs, ys, zs, title="Positive Definite Matrix Transform", xlabel="x", ylabel="y", zlabel="z", cmap=:cool)
 ```
 
 ### Negative definite plot
@@ -96,5 +98,5 @@ ys = -5:0.1:5
 
 zs = [neg_definite(x, y) for x in xs, y in ys]
 
-surface(xs, ys, zs)
+surface(xs, ys, zs, title="Negative Definite Matrix Transform", xlabel="x", ylabel="y", zlabel="z", cmap=:cool)
 ```
