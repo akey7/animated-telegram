@@ -55,7 +55,7 @@ $$
 \end{bmatrix}
 $$
 
-## Make surface plots
+## Surface plots
 
 ### Positive definite plot
 
