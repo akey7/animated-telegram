@@ -33,7 +33,7 @@ $$
 $$
 
 ```{julia}
-#| label: pos-definite-function
+#| label: positive-definite-function
 #| eval: true
 #| include: true
 
@@ -55,6 +55,18 @@ $$
 \end{bmatrix}
 $$
 
+```{julia}
+#| label: negative-definite-function
+#| eval: true
+#| include: true
+
+function neg_definite(x1::Float64, x2::Float64)
+    A = [-1.0 0.0; 0.0 -2.0]
+    x = [x1; x2]
+    x' * A * x
+end
+```
+
 ## Surface plots
 
 ### Positive definite plot
@@ -68,6 +80,21 @@ xs = -5:0.1:5
 ys = -5:0.1:5
 
 zs = [pos_definite(x, y) for x in xs, y in ys]
+
+surface(xs, ys, zs)
+```
+
+### Negative definite plot
+
+```{julia}
+#| label: negative-definite-plot
+#| eval: true
+#| include: true
+
+xs = -5:0.1:5
+ys = -5:0.1:5
+
+zs = [neg_definite(x, y) for x in xs, y in ys]
 
 surface(xs, ys, zs)
 ```
