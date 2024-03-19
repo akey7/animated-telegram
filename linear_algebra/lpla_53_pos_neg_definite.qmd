@@ -1,0 +1,10 @@
+---
+title: "LPLA 53 Positive and Negative Definite Matrices"
+date: "03/19/2024"
+format:
+  html:
+    code-fold: false
+jupyter: julia-1.10
+---
+
+
