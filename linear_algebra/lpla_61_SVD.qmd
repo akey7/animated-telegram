@@ -37,7 +37,7 @@ df = CSV.read(joinpath("D:\\", "Projects", "animated-telegram-jl", "input", "dia
 println(first(df, 5))
 ```
 
-#### Extract, scale, and center measurement columns
+#### Create covariance matrix
 
 First, extract the raw measurement values.
 
@@ -77,4 +77,29 @@ cov_matrix[3, 1] = cov_xz
 cov_matrix[3, 2] = cov_yz
 
 cov_matrix
+```
+
+### SVD
+
+#### Perform SVD
+
+```{julia}
+#| label: perform-svd
+#| eval: true
+#| include: true
+
+U, S, V = svd(cov_matrix)
+println(U)
+println(S)
+println(V)
+```
+
+#### Reconstruct original matrix
+
+```{julia}
+#| label: reconstruct-cov-matrix
+#| eval: true
+#| include: true
+
+U * Diagonal(S) * V'
 ```
