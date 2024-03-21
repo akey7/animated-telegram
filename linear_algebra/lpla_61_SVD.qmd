@@ -15,9 +15,21 @@ jupyter: julia-1.10
 #| include: false
 
 using LinearAlgebra
+using CSV
+using DataFrames
 ```
 
-### Define a matrix to decompose
+### Diamonds dataset
+
+Use the famous [diamonds dataset](https://www.kaggle.com/datasets/shivam2503/diamonds) to create a covariance matrix for the x, y, z dimensions.
+
+#### Load the data
+
+Load the data and look at the first 5 rows.
 
 ```{julia}
+df = CSV.read(joinpath("D:\\", "Projects", "animated-telegram-jl", "input", "diamonds.csv"), DataFrame)
+println(first(df, 5))
 ```
+
+
