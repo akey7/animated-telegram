@@ -1,0 +1,8 @@
+---
+title: "LPLA 61: Singular Value Decomposition"
+date: "03/21/2024"
+format:
+  html:
+    code-fold: false
+jupyter: julia-1.10
+---
