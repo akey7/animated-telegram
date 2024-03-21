@@ -6,3 +6,18 @@ format:
     code-fold: false
 jupyter: julia-1.10
 ---
+
+## Singular value decomposition in Julia
+
+```{julia}
+#| label: load-modules
+#| eval: true
+#| include: false
+
+using LinearAlgebra
+```
+
+### Define a matrix to decompose
+
+```{julia}
+```
