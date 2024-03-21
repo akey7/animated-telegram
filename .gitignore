@@ -34,3 +34,10 @@ Manifest.toml
 *.css
 *.js
 *.woff
+
+# Ignore any conda environments
+env/
+
+# Ignore input and output files
+input/
+output/
