@@ -19,7 +19,7 @@ using CSV
 using DataFrames
 ```
 
-### Diamonds dataset
+### Diamonds Measurement Covariance Matrix
 
 Use the famous [diamonds dataset](https://www.kaggle.com/datasets/shivam2503/diamonds) to create a covariance matrix for the x, y, z dimensions.
 
@@ -28,8 +28,25 @@ Use the famous [diamonds dataset](https://www.kaggle.com/datasets/shivam2503/dia
 Load the data and look at the first 5 rows.
 
 ```{julia}
+#| label: load-data
+#| eval: true
+#| include: true
+
 df = CSV.read(joinpath("D:\\", "Projects", "animated-telegram-jl", "input", "diamonds.csv"), DataFrame)
 println(first(df, 5))
 ```
 
+#### Extract, scale, and center measurement columns
 
+```{julia}
+#| label: preview-measurements
+#| eval: true
+#| include: true
+
+xs = df[:, :x]
+ys = df[:, :y]
+zs = df[:, :z]
+println(xs[1:5])
+println(ys[1:5])
+println(zs[1:5])
+```
