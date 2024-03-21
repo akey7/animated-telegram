@@ -69,5 +69,28 @@ centered_zs = (zs .- mean(zs)) .- std(zs)
 println(centered_xs[1:5])
 println(centered_ys[1:5])
 println(centered_zs[1:5])
+```
 
+Create the covariance matrix:
+
+```{julia}
+#| label: covariance-matrix
+#| eval: true
+#| include: true
+
+cov_matrix = ones(3, 3)
+
+cov_xy = cov(centered_xs, centered_ys)
+cov_xz = cov(centered_xs, centered_zs)
+cov_yz = cov(centered_ys, centered_zs)
+
+cov_matrix[1, 2] = cov_xy
+cov_matrix[1, 3] = cov_xz
+cov_matrix[2, 3] = cov_yz
+
+cov_matrix[2, 1] = cov_xy
+cov_matrix[3, 1] = cov_xz
+cov_matrix[3, 2] = cov_yz
+
+cov_matrix
 ```
