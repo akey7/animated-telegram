@@ -17,6 +17,7 @@ jupyter: julia-1.10
 using LinearAlgebra
 using CSV
 using DataFrames
+using Statistics
 ```
 
 ### Diamonds Measurement Covariance Matrix
@@ -38,6 +39,8 @@ println(first(df, 5))
 
 #### Extract, scale, and center measurement columns
 
+First, extract the raw measurement values.
+
 ```{julia}
 #| label: preview-measurements
 #| eval: true
@@ -46,7 +49,25 @@ println(first(df, 5))
 xs = df[:, :x]
 ys = df[:, :y]
 zs = df[:, :z]
+
 println(xs[1:5])
 println(ys[1:5])
 println(zs[1:5])
+```
+
+Now subtract the mean and standard deviations for each column.
+
+```{julia}
+#| label: scale-and-center-measurements
+#| eval: true
+#| include: true
+
+centered_xs = (xs .- mean(xs)) .- std(xs)
+centered_ys = (ys .- mean(ys)) .- std(ys)
+centered_zs = (zs .- mean(zs)) .- std(zs)
+
+println(centered_xs[1:5])
+println(centered_ys[1:5])
+println(centered_zs[1:5])
+
 ```
