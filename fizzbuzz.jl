@@ -1,4 +1,4 @@
-for i = 1:15
+for i in 1:15
     if (i % 3) == 0
         println("$i fizz")
     elseif (i % 5) == 0
