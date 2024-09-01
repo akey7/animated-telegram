@@ -1,4 +1,5 @@
-using CairoMakie
+using GLMakie
+# using CairoMakie
 
 # Generate some random data
 x = rand(100)
