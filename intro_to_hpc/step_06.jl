@@ -1,5 +1,6 @@
 using CUDA
 using BenchmarkTools
+using Plots
 
 @inbounds function lap2d_gpu!(u, unew)
     M, N = size(u)
@@ -22,4 +23,14 @@ unew = copy(u)
 u_d = CuArray(u)
 unew_d = CuArray(unew)
 
-@btime CUDA.@sync @cuda blocks=blocks threads=threads lap2d_gpu2!($u_d, $unew_d)
+println("Thinking...")
+
+for i in 1:1_000_000
+    @cuda blocks=blocks threads=threads lap2d_gpu!(u_d, unew_d)
+    global u_d = copy(unew_d)
+end
+
+println("Displaying heatmap...")
+display(heatmap(Array(u_d)))
+println("Press enter to exit!")
+readline()
