@@ -8,4 +8,14 @@ Since this repo is not yet a Julia package, it minimally needs the `Plots` packa
 
 ## Quarto
 
-This repo uses [Quarto](https://quarto.org/docs/computations/julia.html) as a rendering environment for Julia execution. Installation can be tricky, and requires Python as well as Julia to be configured correctly. See the preceding reference on installing support for Quarto. 
+This repo uses [Quarto](https://quarto.org/docs/computations/julia.html) as a rendering environment for Julia execution. Installation can be tricky, and requires Python as well as Julia to be configured correctly. See the preceding reference on installing support for Quarto.
+
+## Demonstrations
+
+### `gpu`
+
+These examples [follow this tutorial.](https://cuda.juliagpu.org/stable/tutorials/introduction/)
+
+### `gpu_02`
+
+These examples [follow another tutorial.](https://forem.julialang.org/wikfeldt/a-brief-tour-of-julia-for-high-performance-computing-5deb#:~:text=This%20post%20gives%20an%20overview%20of%20Julia's%20features%20and%20capabilities)
