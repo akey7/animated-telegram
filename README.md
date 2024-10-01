@@ -16,7 +16,7 @@ This repo uses [Quarto](https://quarto.org/docs/computations/julia.html) as a re
 
 These examples [follow this tutorial.](https://cuda.juliagpu.org/stable/tutorials/introduction/)
 
-### `gpu_02`
+### `intro_to_hpc`
 
 These examples [follow another tutorial.](https://forem.julialang.org/wikfeldt/a-brief-tour-of-julia-for-high-performance-computing-5deb#:~:text=This%20post%20gives%20an%20overview%20of%20Julia's%20features%20and%20capabilities)
 
