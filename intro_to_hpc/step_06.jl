@@ -29,7 +29,7 @@ unew_d = CuArray(unew)
 
 println("Thinking...")
 
-for i in 1:10_000
+for i in 1:100_000
     @cuda blocks=blocks threads=threads lap2d_gpu!(u_d, unew_d)
     global u_d = copy(unew_d)
 end
