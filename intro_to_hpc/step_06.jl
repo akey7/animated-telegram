@@ -12,9 +12,13 @@ using Plots
     return nothing
 end
 
-M = 4096
-N = 4096
-threads = (32, 32) # 32*32=1024
+M = 512
+N = 512
+
+# 32*32=1024, adjust for a different device according to
+# CUDA.attribute(device(), CUDA.DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK)
+threads = (32, 32)
+
 blocks = (N÷threads[1], M÷threads[2])
 
 u = zeros(Float32, M, N)
