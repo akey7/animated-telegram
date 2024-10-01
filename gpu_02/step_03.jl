@@ -1,5 +1,6 @@
 using Plots
 using BenchmarkTools
+using .Threads
 
 function lap2d!(u0, unew0)
     M, N = size(u0)
