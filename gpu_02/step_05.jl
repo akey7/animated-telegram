@@ -12,9 +12,9 @@ A = rand(2^13, 2^13)
 A_d = CuArray(A)
 
 println("Using CPU...")
-@benchmark A * A evals = 1
+A * A
 
 println("Using GPU...")
-@benchmark A_d * A_d evals = 1
+A_d * A_d
 
 println("Done!")
