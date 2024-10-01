@@ -1,4 +1,5 @@
 using Plots
+using BenchmarkTools
 
 function lap2d!(u0, unew0)
     M, N = size(u0)
@@ -15,10 +16,12 @@ u = zeros(Float64, M, N)
 u[1, :] = u[end, :] = u[:, 1] = u[:, end] .= 10.0
 unew = copy(u)
 
-for i ∈ 1:50_000
-    lap2d!(u, unew)
-    global u = copy(unew)
-end
+# for i ∈ 1:50_000
+#     lap2d!(u, unew)
+#     global u = copy(unew)
+# end
 
-heatmap(u)
+@btime lap2d!(u, unew)
+
+display(heatmap(u))
 readline()
