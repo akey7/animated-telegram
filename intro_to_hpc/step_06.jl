@@ -1,5 +1,4 @@
 using CUDA
-using BenchmarkTools
 using Plots
 
 @inbounds function lap2d_gpu!(u, unew)
