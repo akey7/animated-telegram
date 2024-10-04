@@ -8,10 +8,14 @@ N = 2^20
 x_d = CUDA.fill(1.0f0, N)  # a vector stored on the GPU filled with 1.0 (Float32)
 y_d = CUDA.fill(2.0f0, N)  # a vector stored on the GPU filled with 2.0
 
+###########################################################
+# DO NOT RUN, TOO MUCH LOGGING!!!                         #
+###########################################################
+
 function gpu_add3!(y, x)
     index = (blockIdx().x - 1) * blockDim().x + threadIdx().x
     stride = gridDim().x * blockDim().x
-    @cuprintln("thread $index, block: $stride, length: $length(y)")
+    @cuprintln("thread $index, block: $stride")
     for i ∈ index:stride:length(y)
         @inbounds y[i] += x[i]
     end
