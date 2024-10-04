@@ -17,12 +17,14 @@ function gpu_add3!(y, x)
     return nothing
 end
 
-numblocks = ceil(Int, N/256)
-
 function bench_gpu3!(y, x)
-    numblocks = ceil(Int, length(y)/256)
+    kernel = @cuda launch=false gpu_add3!(y_d, x_d)
+    config = launch_configuration(kernel.fun)
+    threads = min(N, config.threads)
+    blocks = cld(N, threads)
+
     CUDA.@sync begin
-        @cuda threads=256 blocks=numblocks gpu_add3!(y, x)
+        kernel(y, x; threads, blocks)
     end
 end
 
