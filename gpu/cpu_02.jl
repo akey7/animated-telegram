@@ -1,6 +1,5 @@
 # From https://cuda.juliagpu.org/stable/tutorials/introduction/
 
-using Test
 using BenchmarkTools
 
 N = 2^20
@@ -15,5 +14,4 @@ function sequential_add!(y, x)
 end
 
 fill!(y, 2)
-sequential_add!(y, x)
-@test all(y .== 3.0f0)
+@btime sequential_add!(y, x)

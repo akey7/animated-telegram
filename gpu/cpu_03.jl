@@ -1,6 +1,5 @@
 # From https://cuda.juliagpu.org/stable/tutorials/introduction/
 
-using Test
 using BenchmarkTools
 
 N = 2^20
@@ -15,6 +14,4 @@ function parallel_add!(y, x)
 end
 
 fill!(y, 2)
-# @btime parallel_add!(y, x)
-parallel_add!(y, x)
-@test all(y .== 3.0f0)
+@btime parallel_add!(y, x)
