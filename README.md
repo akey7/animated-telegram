@@ -12,7 +12,7 @@ This repo uses [Quarto](https://quarto.org/docs/computations/julia.html) as a re
 
 ## Demonstrations
 
-### `gpu`
+### `bare_metal_gpu`
 
 These examples [follow this tutorial.](https://cuda.juliagpu.org/stable/tutorials/introduction/)
 
