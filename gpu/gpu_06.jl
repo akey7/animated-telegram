@@ -17,12 +17,14 @@ function gpu_add3!(y, x)
     return nothing
 end
 
-function bench_gpu2!(y, x)
+numblocks = ceil(Int, N/256)
+
+function bench_gpu3!(y, x)
+    numblocks = ceil(Int, length(y)/256)
     CUDA.@sync begin
-        @cuda threads=256 gpu_add2!(y, x)
+        @cuda threads=256 blocks=numblocks gpu_add3!(y, x)
     end
 end
 
 fill!(y_d, 2)
-# @test all(Array(y_d) .== 3.0f0)
-@btime bench_gpu2!($y_d, $x_d)
+@btime bench_gpu3!($y_d, $x_d)
