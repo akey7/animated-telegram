@@ -17,3 +17,5 @@ end
 fill!(y, 2)
 sequential_add!(y, x)
 @test all(y .== 3.0f0)
+
+println("No news is good news!")
