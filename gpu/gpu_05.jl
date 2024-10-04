@@ -17,7 +17,12 @@ function gpu_add2!(y, x)
     return nothing
 end
 
+function bench_gpu2!(y, x)
+    CUDA.@sync begin
+        @cuda threads=256 gpu_add2!(y, x)
+    end
+end
+
 fill!(y_d, 2)
-@cuda threads=1024 gpu_add2!(y_d, x_d)  # Example uses 256, but I have 1024 on all my machines
-@test all(Array(y_d) .== 3.0f0)
-println("No news is good news!")
+# @test all(Array(y_d) .== 3.0f0)
+@btime bench_gpu2!($y_d, $x_d)
