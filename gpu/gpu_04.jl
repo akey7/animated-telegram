@@ -15,8 +15,12 @@ function gpu_add1!(y, x)
     return nothing
 end
 
-fill!(y_d, 2)
-@cuda gpu_add1!(y_d, x_d)
-@test all(Array(y_d) .== 3.0f0)
+function bench_gpu1!(y, x)
+    CUDA.@sync begin
+        @cuda gpu_add1!(y, x)
+    end
+end
+
+@btime bench_gpu1!($y_d, $x_d)
 
 println("No news is good news!")
