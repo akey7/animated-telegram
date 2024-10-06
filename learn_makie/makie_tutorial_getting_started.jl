@@ -1,3 +1,5 @@
+# Following https://docs.makie.org/stable/tutorials/getting-started
+
 using CairoMakie
 
 seconds = 0:0.1:2
