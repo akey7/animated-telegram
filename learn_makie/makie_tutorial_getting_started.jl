@@ -6,7 +6,8 @@ measurements = [8.2, 8.4, 6.3, 9.5, 9.1, 10.5, 8.6, 8.2, 10.5, 8.5, 7.2, 8.8, 9.
 # Create a simple scatter plot
 fig = Figure()
 ax = Axis(fig[1, 1])
-lines!(ax, 1:10, rand(10))
+lines!(ax, seconds, exp.(seconds) .+ 7)
+scatter!(ax, seconds, measurements)
 
-# Display the plot
-display(fig)
+# Save the plot
+save("learn_makie.png", fig)
