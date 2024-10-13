@@ -82,3 +82,13 @@ Tree = @load DecisionTreeClassifier pkg=DecisionTree
 
 tree = Tree()
 ```
+
+## Evaluate the tree
+
+```{julia}
+#| label: evaluate-tree
+#| eval: true
+#| include: true
+
+evaluate(tree, X, y, resampling=CV(shuffle=true), measures=[log_loss, accuracy], verbosity=1)
+```
