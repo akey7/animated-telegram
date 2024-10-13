@@ -35,6 +35,7 @@ Manifest.toml
 *.js
 *.woff
 *.mp4
+*.ipynb
 
 # Ignore any conda environments
 env/
