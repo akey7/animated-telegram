@@ -62,3 +62,23 @@ models(matching(X,y))
 
 doc("DecisionTreeClassifier", pkg="DecisionTree")
 ```
+
+## Load the decision tree classifier
+
+```{julia}
+#| label: load-decision-tree
+#| eval: true
+#| include: true
+
+Tree = @load DecisionTreeClassifier pkg=DecisionTree
+```
+
+## Instantiate a decision tree
+
+```{julia}
+#| label: instantiate-tree
+#| eval: true
+#| include: true
+
+tree = Tree()
+```
