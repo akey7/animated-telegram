@@ -21,6 +21,8 @@ using MLJ
 using DataFrames
 ```
 
+This document follows [Getting Started](https://juliaai.github.io/MLJ.jl/dev/getting_started/#Getting-Started) in the MLJ documentation.
+
 ## Load and preview the data
 
 ```{julia}
@@ -29,6 +31,7 @@ using DataFrames
 #| include: true
 
 iris = load_iris()
+iris = DataFrame(iris)
 selectrows(iris, 1:3) |> pretty
 ```
 
@@ -40,7 +43,7 @@ selectrows(iris, 1:3) |> pretty
 #| include: true
 
 y, X = unpack(iris, ==(:target); rng=123)
-first(X, 5)
+X
 ```
 
 ## What are the matching models?
@@ -134,4 +137,38 @@ But what exactly is that?
 #| include: true
 
 subtypes(Finite)
+```
+
+## Switching it up: fit and predict!
+
+### Create a machine
+
+```{julia}
+#| label: create-a-machine
+#| eval: true
+#| include: true
+
+mach = machine(tree, X, y)
+```
+
+### Train-test split and split
+
+```{julia}
+#| label: train-test-split
+#| eval: true
+#| include: true
+
+train, test = partition(eachindex(y), 0.7)  # 70/30 split
+fit!(mach, rows = train)
+```
+
+### Predict
+
+```{julia}
+#| label: predict
+#| eval: true
+#| include: true
+
+yhat = predict(mach, X[test,:])
+yhat[3:5]
 ```
