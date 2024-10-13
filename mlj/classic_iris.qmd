@@ -92,3 +92,46 @@ tree = Tree()
 
 evaluate(tree, X, y, resampling=CV(shuffle=true), measures=[log_loss, accuracy], verbosity=1)
 ```
+
+## Scientific Types!
+
+### Type of `y`
+
+```{julia}
+#| label: typeof-y
+#| eval: true
+#| include: true
+
+typeof(y)
+```
+
+Compare to
+
+```{julia}
+#| label: scitypeof-y
+#| eval: true
+#| include: true
+
+scitype(y)
+```
+
+### Requirements of `target` for the tree
+
+Requirements of the tree
+
+```{julia}
+#| label: requirements-of-target
+#| eval: true
+#| include: true
+
+target_scitype(tree)
+```
+
+But what exactly is that?
+```{julia}
+#| label: but-what-exactly-is-that
+#| eval: true
+#| include: true
+
+subtypes(Finite)
+```
