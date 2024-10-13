@@ -1,0 +1,28 @@
+---
+title: "Classic Iris"
+format:
+  html:
+    toc: true
+    html-math-method: mathjax
+    code-fold: false
+---
+
+```{julia}
+#| label: using-things
+#| eval: true
+#| include: false
+
+# Activate the proper Julia Project.toml
+using Pkg
+Pkg.activate("..", io=devnull)
+
+using Printf
+using Plots
+using Random
+using Distributions
+
+plotlyjs()
+Random.seed!(1234)
+```
+
+
