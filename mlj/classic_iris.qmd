@@ -19,6 +19,7 @@ Pkg.activate("..", io=devnull)
 using PrettyTables
 using MLJ
 using DataFrames
+using Distributions
 ```
 
 This document follows [Getting Started](https://juliaai.github.io/MLJ.jl/dev/getting_started/#Getting-Started) in the MLJ documentation.
@@ -171,4 +172,26 @@ fit!(mach, rows = train)
 
 yhat = predict(mach, X[test,:])
 yhat[3:5]
+```
+
+### Distributions of prediction probabilities
+
+Probability of virginica.
+
+```{julia}
+#| label: distributions-of-predictions
+#| eval: true
+#| include: true
+
+broadcast(pdf, yhat[3:5], "virginica")
+```
+
+Mode of each distribution
+
+```{julia}
+#| label: mode-of-each-predictions
+#| eval: true
+#| include: true
+
+predict_mode(mach, X[test[3:5],:])
 ```
