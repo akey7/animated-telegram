@@ -1,0 +1,208 @@
+---
+title: "Classic Iris"
+format:
+  html:
+    toc: true
+    html-math-method: mathjax
+    code-fold: false
+---
+
+```{julia}
+#| label: using-things
+#| eval: true
+#| include: false
+
+# Activate the proper Julia Project.toml
+using Pkg
+Pkg.activate("..", io=devnull)
+
+using PrettyTables
+using MLJ
+using DataFrames
+using Distributions
+```
+
+This document follows [Getting Started](https://juliaai.github.io/MLJ.jl/dev/getting_started/#Getting-Started) in the MLJ documentation.
+
+## Load and preview the data
+
+```{julia}
+#| label: load-and-preview
+#| eval: true
+#| include: true
+
+iris = load_iris()
+iris = DataFrame(iris)
+selectrows(iris, 1:3) |> pretty
+```
+
+## Split features and target
+
+```{julia}
+#| label: split-features-and-target
+#| eval: true
+#| include: true
+
+y, X = unpack(iris, ==(:target); rng=123)
+X
+```
+
+## What are the matching models?
+
+```{julia}
+#| label: models-matching-x-y
+#| eval: true
+#| include: true
+
+models(matching(X,y))
+```
+
+## What are the docs for a decision tree classifier?
+
+```{julia}
+#| label: decision-tree-docs
+#| eval: true
+#| include: true
+
+doc("DecisionTreeClassifier", pkg="DecisionTree")
+```
+
+## Load the decision tree classifier
+
+```{julia}
+#| label: load-decision-tree
+#| eval: true
+#| include: true
+
+Tree = @load DecisionTreeClassifier pkg=DecisionTree
+```
+
+## Instantiate a decision tree
+
+```{julia}
+#| label: instantiate-tree
+#| eval: true
+#| include: true
+
+tree = Tree()
+```
+
+## Evaluate the tree
+
+```{julia}
+#| label: evaluate-tree
+#| eval: true
+#| include: true
+
+evaluate(tree, X, y, resampling=CV(shuffle=true), measures=[log_loss, accuracy], verbosity=1)
+```
+
+## Scientific Types!
+
+### Type of `y`
+
+```{julia}
+#| label: typeof-y
+#| eval: true
+#| include: true
+
+typeof(y)
+```
+
+Compare to
+
+```{julia}
+#| label: scitypeof-y
+#| eval: true
+#| include: true
+
+scitype(y)
+```
+
+### Requirements of `target` for the tree
+
+Requirements of the tree
+
+```{julia}
+#| label: requirements-of-target
+#| eval: true
+#| include: true
+
+target_scitype(tree)
+```
+
+But what exactly is that?
+```{julia}
+#| label: but-what-exactly-is-that
+#| eval: true
+#| include: true
+
+subtypes(Finite)
+```
+
+## Switching it up: fit and predict!
+
+### Create a machine
+
+```{julia}
+#| label: create-a-machine
+#| eval: true
+#| include: true
+
+mach = machine(tree, X, y)
+```
+
+### Train-test split and split
+
+```{julia}
+#| label: train-test-split
+#| eval: true
+#| include: true
+
+train, test = partition(eachindex(y), 0.7)  # 70/30 split
+fit!(mach, rows = train)
+```
+
+### Predict
+
+```{julia}
+#| label: predict
+#| eval: true
+#| include: true
+
+yhat = predict(mach, X[test,:])
+yhat[3:5]
+```
+
+### Distributions of prediction probabilities
+
+Probability of virginica.
+
+```{julia}
+#| label: distributions-of-predictions
+#| eval: true
+#| include: true
+
+broadcast(pdf, yhat[3:5], "virginica")
+```
+
+Mode of each distribution
+
+```{julia}
+#| label: mode-of-each-predictions
+#| eval: true
+#| include: true
+
+predict_mode(mach, X[test[3:5],:])
+```
+
+## Evaluate the machine directly!
+
+```{julia}
+#| label: evaluate-machine-directly
+#| eval: true
+#| include: true
+
+tree.max_depth = 3
+evaluate!(mach, resampling=Holdout(fraction_train=0.7), measures=[log_loss, accuracy],verbosity=1)
+```
