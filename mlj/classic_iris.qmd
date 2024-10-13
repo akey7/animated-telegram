@@ -31,3 +31,14 @@ using DataFrames
 iris = load_iris()
 selectrows(iris, 1:3) |> pretty
 ```
+
+## Split features and target
+
+```{julia}
+#| label: split-features-and-target
+#| eval: true
+#| include: true
+
+y, X = unpack(iris, ==(:target); rng=123)
+first(X, 5)
+```
