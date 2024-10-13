@@ -195,3 +195,14 @@ Mode of each distribution
 
 predict_mode(mach, X[test[3:5],:])
 ```
+
+## Evaluate the machine directly!
+
+```{julia}
+#| label: evaluate-machine-directly
+#| eval: true
+#| include: true
+
+tree.max_depth = 3
+evaluate!(mach, resampling=Holdout(fraction_train=0.7), measures=[log_loss, accuracy],verbosity=1)
+```
