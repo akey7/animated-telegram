@@ -52,3 +52,13 @@ first(X, 5)
 
 models(matching(X,y))
 ```
+
+## What are the docs for a decision tree classifier?
+
+```{julia}
+#| label: decision-tree-docs
+#| eval: true
+#| include: true
+
+doc("DecisionTreeClassifier", pkg="DecisionTree")
+```
