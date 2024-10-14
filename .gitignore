@@ -46,3 +46,6 @@ output/
 
 # Ignore VSCode specific files
 *.vscode
+
+# Ignore any Jupyter notebook files
+*.quarto_ipynb
