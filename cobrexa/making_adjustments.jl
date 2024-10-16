@@ -18,3 +18,18 @@ println("# PFK STOICHIOMETRY                                        #")
 println("############################################################")
 
 println(model.reactions["PFK"].stoichiometry)
+
+println("############################################################")
+println("# FBA: BASE SOLUTION                                       #")
+println("############################################################")
+
+base_solution = flux_balance_analysis(model, optimizer = HiGHS.Optimizer)
+println(base_solution.objective)
+
+println("############################################################")
+println("# FBA: GLUCOSE INTAKE LIMITED                              #")
+println("############################################################")
+
+model.reactions["EX_glc__D_e"].lower_bound = -5.0
+low_glucose_solution = flux_balance_analysis(model, optimizer = HiGHS.Optimizer)
+println(low_glucose_solution.objective)
