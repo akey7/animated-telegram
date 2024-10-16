@@ -1,4 +1,4 @@
-# Following https://cobrexa.github.io/COBREXA.jl/dev/examples/03a-flux-variability-analysis/
+# Following https://cobrexa.github.io/COBREXA.jl/dev/examples/03b-parsimonious-flux-balance/
 
 using COBREXA
 import Clarabel
@@ -16,11 +16,25 @@ for reaction ∈ A.reactions(model)
 end
 
 println("############################################################")
-println("# FVA: WITHIN 1%                                           #")
+println("# pFBA FLUXES                                              #")
 println("############################################################")
 
-solution = parsimonious_flux_balance_analysis(model; optimizer = Clarabel.Optimizer)
+import HiGHS
+
+solution = parsimonious_flux_balance_analysis(
+    model;
+    optimizer = HiGHS.Optimizer, # HiGHS is used only for LP here
+    parsimonious_optimizer = Clarabel.Optimizer, # Clarabel is great for solving QPs
+)
+
+println("Available data in solution:")
 
 for element ∈ solution
     println(element)
+end
+
+println("Fluxes:")
+
+for flux ∈ solution.fluxes
+    println(flux)
 end
