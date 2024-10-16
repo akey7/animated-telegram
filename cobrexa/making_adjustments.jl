@@ -1,3 +1,5 @@
+# https://cobrexa.github.io/COBREXA.jl/dev/examples/02c-model-modifications/
+
 using COBREXA
 import JSONFBCModels
 import AbstractFBCModels.CanonicalModel as CM
@@ -35,11 +37,11 @@ low_glucose_solution = flux_balance_analysis(model, optimizer = HiGHS.Optimizer)
 println(low_glucose_solution.objective)
 
 println("############################################################")
-println("# FBA: TOP 10 FLUX DIFFERENCES                             #")
+println("# FBA: TOP 10 FLUX DIFFERENCES, SQUARED DIFFERENCE         #")
 println("############################################################")
 
-flux_differences = mergewith(-, base_solution.fluxes, low_glucose_solution.fluxes)
+flux_differences = mergewith((x, y) -> (x - y)^2, base_solution.fluxes, low_glucose_solution.fluxes)
 
-for diff ∈ first(sort(collect(flux_differences), by = last), 5)
+for diff ∈ first(sort(collect(flux_differences)), 5)
     println(diff[1], " ", diff[2])
 end
