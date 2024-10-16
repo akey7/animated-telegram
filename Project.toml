@@ -1,4 +1,5 @@
 [deps]
+AbstractFBCModels = "5a4f3dfa-1789-40f8-8221-69268c29937c"
 BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 COBREXA = "babc4406-5200-4a30-9033-bf5ae714c842"
 CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
