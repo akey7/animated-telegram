@@ -23,3 +23,17 @@ solution = flux_variability_analysis(model, optimizer = HiGHS.Optimizer)
 for element ∈ solution
     println(element)
 end
+
+println("############################################################")
+println("# FVA: VERY CLOSE                                          #")
+println("############################################################")
+
+very_close = flux_variability_analysis(
+    model,
+    optimizer = HiGHS.Optimizer,
+    objective_bound = absolute_tolerance_bound(1e-5),
+)
+
+for element ∈ very_close
+    println(element)
+end
