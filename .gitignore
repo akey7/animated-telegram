@@ -49,3 +49,6 @@ output/
 
 # Ignore any Jupyter notebook files
 *.quarto_ipynb
+
+# Ignore JSON
+*.json 
