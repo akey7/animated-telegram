@@ -15,25 +15,15 @@ for reaction ∈ A.reactions(model)
 end
 
 println("############################################################")
-println("# FVA                                                      #")
+println("# FVA: WITHIN 1%                                           #")
 println("############################################################")
 
-solution = flux_variability_analysis(model, optimizer = HiGHS.Optimizer)
-
-for element ∈ solution
-    println(element)
-end
-
-println("############################################################")
-println("# FVA: VERY CLOSE                                          #")
-println("############################################################")
-
-very_close = flux_variability_analysis(
+one_percent_close = flux_variability_analysis(
     model,
     optimizer = HiGHS.Optimizer,
-    objective_bound = absolute_tolerance_bound(1e-5),
+    objective_bound = relative_tolerance_bound(0.99),
 )
 
-for element ∈ very_close
+for element ∈ one_percent_close
     println(element)
 end
