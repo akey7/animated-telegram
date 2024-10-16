@@ -25,3 +25,4 @@ scatter!(ax, fluxes[:, 1], fluxes[:, 2], color = :blue, markersize = 10)
 display(fig)
 
 println("Press enter to exit...")
+readline()
