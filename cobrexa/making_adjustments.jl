@@ -33,3 +33,13 @@ println("############################################################")
 model.reactions["EX_glc__D_e"].lower_bound = -5.0
 low_glucose_solution = flux_balance_analysis(model, optimizer = HiGHS.Optimizer)
 println(low_glucose_solution.objective)
+
+println("############################################################")
+println("# FBA: TOP 10 FLUX DIFFERENCES                             #")
+println("############################################################")
+
+flux_differences = mergewith(-, base_solution.fluxes, low_glucose_solution.fluxes)
+
+for diff ∈ first(sort(collect(flux_differences), by = last), 5)
+    println(diff[1], " ", diff[2])
+end
