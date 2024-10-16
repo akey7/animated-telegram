@@ -37,7 +37,17 @@ low_glucose_solution = flux_balance_analysis(model, optimizer = HiGHS.Optimizer)
 println(low_glucose_solution.objective)
 
 println("############################################################")
-println("# FBA: TOP 10 FLUX DIFFERENCES, SQUARED DIFFERENCE         #")
+println("# FBA: TOP 10 FLUX DIFFERENCES, DIRECTIONAL DIFFERENCES    #")
+println("############################################################")
+
+flux_differences = mergewith(-, base_solution.fluxes, low_glucose_solution.fluxes)
+
+for diff ∈ first(sort(collect(flux_differences), by = last), 5)
+    println(diff[1], " ", diff[2])
+end
+
+println("############################################################")
+println("# FBA: TOP 10 FLUXES, SQUARED DIFFERENCE                   #")
 println("############################################################")
 
 flux_differences = mergewith((x, y) -> (x - y)^2, base_solution.fluxes, low_glucose_solution.fluxes)
