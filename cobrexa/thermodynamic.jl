@@ -38,3 +38,25 @@ reaction_standard_gibbs_free_energies = Dict{String,Float64}( # units of the ene
 for (reaction_name, ΔG) ∈ reaction_standard_gibbs_free_energies
     println("Reaction: ", reaction_name, ", ΔG: ", ΔG)
 end
+
+println("############################################################")
+println("# REFERENCE FLUX                                           #")
+println("############################################################")
+
+reference_flux = Dict(
+    "ENO" => 1.0,
+    "FBA" => 1.0,
+    "GAPD" => 1.0,
+    "GLCpts" => 1.0,
+    "LDH_D" => -1.0,
+    "PFK" => 1.0,
+    "PGI" => 1.0,
+    "PGK" => -1.0,
+    "PGM" => 0.0,
+    "PYK" => 1.0,
+    "TPI" => 1.0,
+)
+
+for (reaction_name, flux) ∈ reference_flux
+    println("Reaction: ", reaction_name, ", Flux: ", flux)
+end
