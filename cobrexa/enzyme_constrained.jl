@@ -300,3 +300,9 @@ println("############################################################")
 for (gene_name, amount) ∈ ec_solution.gene_product_amounts
     println("Gene: ", gene_name, " Amount: ", amount)
 end
+
+println("############################################################")
+println("# REQUIRED GENE PRODUCT MASS                               #")
+println("############################################################")
+
+println(ec_solution.gene_product_capacity[:total_capacity])
