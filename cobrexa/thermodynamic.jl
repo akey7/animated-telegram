@@ -60,3 +60,29 @@ reference_flux = Dict(
 for (reaction_name, flux) ∈ reference_flux
     println("Reaction: ", reaction_name, ", Flux: ", flux)
 end
+
+println("############################################################")
+println("# MAX MIN DRIVING FORCE ANALYSIS                           #")
+println("############################################################")
+
+mmdf_solution = max_min_driving_force_analysis(
+    model;
+    reaction_standard_gibbs_free_energies,
+    reference_flux,
+    constant_concentrations = Dict("g3p_c" => exp(-8.5)),
+    concentration_ratios = Dict(
+        "atp" => ("atp_c", "adp_c", 10.0),
+        "nadh" => ("nadh_c", "nad_c", 0.13),
+    ),
+    proton_metabolites = ["h_c"],
+    water_metabolites = ["h2o_c"],
+    concentration_lower_bound = 1e-6, # mol/L
+    concentration_upper_bound = 1e-1, # mol/L
+    T = 298.15, # Kelvin
+    R = 8.31446261815324e-3, # kJ/K/mol
+    optimizer = HiGHS.Optimizer,
+)
+
+for element ∈ mmdf_solution
+    println(element)
+end
