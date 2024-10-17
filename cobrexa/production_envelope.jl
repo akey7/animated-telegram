@@ -30,3 +30,10 @@ println("Available data in solution:")
 for element ∈ envelope
     println(element)
 end
+
+println("############################################################")
+println("# RANGES                                                   #")
+println("############################################################")
+
+println(envelope[1][1])
+println(envelope[1][2])
