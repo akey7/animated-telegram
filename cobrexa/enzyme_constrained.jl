@@ -306,3 +306,33 @@ println("# REQUIRED GENE PRODUCT MASS                               #")
 println("############################################################")
 
 println(ec_solution.gene_product_capacity[:total_capacity])
+
+println("############################################################")
+println("# SIMPLIFIED ENZYME-CONSTRAINED SOLUTION                   #")
+println("############################################################")
+
+simplified_ec_solution = simplified_enzyme_constrained_flux_balance_analysis(
+    model;
+    reaction_isozymes,
+    gene_product_molar_masses = ecoli_core_gene_product_masses,
+    capacity = total_enzyme_capacity,
+    optimizer = HiGHS.Optimizer,
+)
+
+for element ∈ ec_solution
+    println(element)
+end
+
+println("############################################################")
+println("# SIMPLIFIED SOLUTION TOTAL CAPACITY                       #")
+println("############################################################")
+
+println(simplified_ec_solution.capacity_limits.total_capacity)
+
+println("############################################################")
+println("# SIMPLIFIED GENE PRODUCT AMOUNTS                          #")
+println("############################################################")
+
+for (gene_name, amount) ∈ simplified_ec_solution.gene_product_amounts
+    println("Gene: ", gene_name, " Amount: ", amount)
+end
