@@ -262,3 +262,41 @@ const ecoli_core_gene_product_masses = Dict(
 for (gene_name, product_mass) ∈ ecoli_core_gene_product_masses
     println("Gene: ", gene_name, ", Product mass: ", product_mass)
 end
+
+println("############################################################")
+println("# TOTAL ENZYME CAPACITY                                    #")
+println("############################################################")
+
+total_enzyme_capacity = 50.0 # mg of enzyme/gDW
+
+println(total_enzyme_capacity)
+
+println("############################################################")
+println("# BASIC ENZYME CONSTRAINED MODEL                           #")
+println("############################################################")
+
+ec_solution = enzyme_constrained_flux_balance_analysis(
+    model;
+    reaction_isozymes,
+    gene_product_molar_masses = ecoli_core_gene_product_masses,
+    capacity = total_enzyme_capacity,
+    optimizer = HiGHS.Optimizer,
+)
+
+for element ∈ ec_solution
+    println(element)
+end
+
+println("############################################################")
+println("# SOLUTION OBJECTIVE                                       #")
+println("############################################################")
+
+println(ec_solution.objective)
+
+println("############################################################")
+println("# GENE PRODUCT AMOUNTS                                     #")
+println("############################################################")
+
+for (gene_name, amount) ∈ ec_solution.gene_product_amounts
+    println("Gene: ", gene_name, " Amount: ", amount)
+end
