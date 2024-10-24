@@ -1,4 +1,6 @@
 using COBREXA
+using DataFrames
+using CSV
 import JSONFBCModels, HiGHS
 
 model = load_model("e_coli_core.json")
@@ -51,6 +53,9 @@ sample = sample_constraints(
     collect_iterations = collect(10:15),
 )
 
-for (key, value) ∈ sample
-    println(key, " ", value[1:5])
+s_dict = Dict()
+for reaction_id ∈ keys(sample)
+    s_dict[reaction_id] = sample[reaction_id]
 end
+samples_df = DataFrame(s_dict)
+CSV.write("samples.csv", samples_df)
