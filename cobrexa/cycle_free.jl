@@ -70,7 +70,7 @@ for reaction_id ∈ keys(sample)
     fluxes = sample[reaction_id]
     fig = Figure()
     ax = Axis(fig[1, 1])
-    hist!(ax, fluxes)
+    hist!(ax, fluxes, bins = 100)
     save(joinpath("plots", "$reaction_id.png"), fig)
     println("Saved $reaction_id")
 end
