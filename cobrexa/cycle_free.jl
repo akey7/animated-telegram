@@ -1,14 +1,17 @@
 using COBREXA
 using DataFrames
 using CSV
+using CairoMakie
 import JSONFBCModels, HiGHS
 
+println("(1)")
 model = load_model("e_coli_core.json")
 cs = flux_balance_constraints(model, interface = :identifier_prefixes)
 some_flux =
     optimized_values(cs, objective = cs.objective.value, optimizer = HiGHS.Optimizer)
 import ConstraintTrees as C
 
+println("(2)")
 cs = linear_parsimonious_flux_balance_constraints(model)
 
 cs *=
@@ -29,6 +32,7 @@ cs.objective.bound = C.Between(cycle_free_flux.objective * 0.999, Inf)
 cs.parsimonious_objective.bound =
     C.Between(0, cycle_free_flux.parsimonious_objective * 1.001)
 
+println("(3)")
 var = constraints_variability(cs, cs.fluxes, optimizer = HiGHS.Optimizer)
 
 warmup = vcat(
@@ -43,6 +47,7 @@ warmup = vcat(
     )...,
 )
 
+println("(4)")
 sample = sample_constraints(
     sample_chain_achr,
     cs,
@@ -53,9 +58,19 @@ sample = sample_constraints(
     collect_iterations = collect(10:15),
 )
 
+println("(5)")
 s_dict = Dict()
 for reaction_id ∈ keys(sample)
     s_dict[reaction_id] = sample[reaction_id]
 end
 samples_df = DataFrame(s_dict)
 CSV.write("samples.csv", samples_df)
+
+for reaction_id ∈ keys(sample)
+    fluxes = sample[reaction_id]
+    fig = Figure()
+    ax = Axis(fig[1, 1])
+    hist!(ax, fluxes)
+    save(joinpath("plots", "$reaction_id.png"), fig)
+    println("Saved $reaction_id")
+end
